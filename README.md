@@ -1,1 +1,1 @@
-# Collisions_Canada
+ Collisions_Canada is a project of analyzing the road accident data from Canada using the skills I obtained from the project "Build a Data Science Web App with Streamlit and Python": https://coursera.org/share/f5b8e25417a8e617f2efe220a1bdfcfc
