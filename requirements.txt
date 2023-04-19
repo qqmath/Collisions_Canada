@@ -1,0 +1,5 @@
+numpy
+pandas
+streamlit
+pydeck
+plotly.express
