@@ -21,8 +21,8 @@ def load_data(nrows):
     data.rename(columns={'C_YEAR_C_MONTH_C_WDAY_C_HOUR': 'date/time'}, inplace=True)
     return data
 
-data = load_data(100000)
-original_data = data
+#data = load_data(100000)
+#original_data = data
 
 st.header("How many cases of people injured or died in collisions in Canada?")
 injured_people = st.slider("Number of cases when people injured in vehicle collisions or there was a fatality", 2,3)
