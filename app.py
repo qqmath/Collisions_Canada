@@ -21,8 +21,7 @@ def load_data(nrows):
     data.rename(columns={'C_YEAR_C_MONTH_C_WDAY_C_HOUR': 'date/time'}, inplace=True)
     return data
 
-#data = load_data(100000)
-#original_data = data
+
 
 st.header("How many cases of people injured or died in collisions in Canada?")
 injured_people = st.slider("Number of cases when people injured in vehicle collisions or there was a fatality", 2,3)
@@ -33,28 +32,6 @@ hour = st.sidebar.slider("Hour to look at", 0, 23)
 data = data[data['date/time'].dt.hour == hour]
 
 st.markdown("Vehicle collisions between %i:00 and %i:00" % (hour, (hour + 1)%24))
-midpoint = (np.average(data['latitude']),np.average(data['longitude']))
-st.write(pdk.Deck(
-    map_style="mapbox://styles/mapbox/light-v9",
-    initial_view_state={
-    "latitude": midpoint[0],
-    "longitude": midpoint[1],
-    "zoom": 11,
-    "pitch": 50,
-    },
-    layers=[
-    pdk.Layer(
-    "HexagonLayer",
-    data=data[['date/time', 'latitude', 'longitude']],
-    get_position=['longitude', 'latitude'],
-    radius=100,
-    extruded=True,
-    pickable=True,
-    elevation_scale=4,
-    elevation_range=[0, 1000],
-    ),
-    ],
-))
 
 st.subheader("Breakdown by minute between %i:00 and %i:00" % (hour, (hour + 1) %24))
 filtered = data[
