@@ -13,19 +13,20 @@ st.markdown("This application is a Streamlit dashboard that can be used"
 
 @st.cache(persist=True)
 def load_data(nrows):
-    data = pd.read_csv(DATA_URL, nrows=nrows, parse_dates=[['CRASH_DATE', 'CRASH_TIME']])
-    data.dropna(subset=['LATITUDE', 'LONGITUDE'], inplace=True)
-    lowercase = lambda x: str(x).lower()
-    data.rename(lowercase, axis='columns', inplace=True)
-    data.rename(columns={'crash_date_crash_time': 'date/time'}, inplace=True)
+    data = pd.read_csv(DATA_URL, nrows=nrows, parse_dates=[['C_YEAR', 'C_MONTH', 'C_WDAY', 'C_HOUR']])
+   #data.dropna(subset=['LATITUDE', 'LONGITUDE'], inplace=True)
+    #lowercase = lambda x: str(x).lower()
+    #data.rename(lowercase, axis='columns', inplace=True)
+    #data.rename(columns={'crash_date_crash_time': 'date/time'}, inplace=True)
+    data.rename(columns={'C_YEAR_C_MONTH_C_WDAY_C_HOUR': 'date/time'}, inplace=True)
     return data
 
 data = load_data(100000)
 original_data = data
 
-st.header("Where are the most people injured in Canada?")
-injured_people = st.slider("Number of people injured in vehicle collisions", 0, 19)
-st.map(data.query("injured_persons >= @injured_people")[["latitude", "longitude"]].dropna(how="any"))
+st.header("How many cases of people injured or died in collisions in Canada?")
+injured_people = st.slider("Number of cases when people injured in vehicle collisions or there was a fatality", 2,3)
+#st.map(data.query("injured_persons >= @injured_people")[["latitude", "longitude"]].dropna(how="any"))
 
 st.header("How many collisions happen during a given time of day?")
 hour = st.sidebar.slider("Hour to look at", 0, 23)
